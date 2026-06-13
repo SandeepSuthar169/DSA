@@ -11,6 +11,7 @@ const BruteTwoSum = (arr, target) => {
 }
 // console.log(BruteTwoSum([2, 3, 4, 5, 6], 11));
 
+// =========================================================================
 
 const TowSum = (arr, target) => {
     let left  = 0;
@@ -31,30 +32,31 @@ const TowSum = (arr, target) => {
 }
 
 // console.log(TowSum([1, 2, 4, 6, 10], 8));
-
+// =========================================================================
 //  Squares of a Sorted Array
 
-const squaresSortedArr = (nums) => {
-    let newSquarearr = nums.map((nums) => nums * nums)
+const squaresSortedArr = (num) => {
+    let newSquarearr = num.map((num) => num * num)
 
     return newSquarearr.sort((a, b) => a - b)
 }
 
 // console.log(squaresSortedArr([-4, -1, 0, 3, 10]));
 
+// =========================================================================
 
-const SquaaresOfSortedArray = (nums) => {
+const SquaaresOfSortedArray = (num) => {
     let left = 0;
-    let right = nums.length - 1;
-    let index = nums.length - 1;
+    let right = num.length - 1;
+    let index = num.length - 1;
 
-    let newArray = new Array(nums.length)
+    let newArray = new Array(num.length)
 
 
 
     while (left <= right) {
-        let leftSquare = nums[left] * nums[left]
-        let rightSquare = nums[right] * nums[right]
+        let leftSquare = num[left] * num[left]
+        let rightSquare = num[right] * num[right]
 
         if(leftSquare > rightSquare) {
             newArray[index] = leftSquare
@@ -71,21 +73,103 @@ const SquaaresOfSortedArray = (nums) => {
 
 // console.log(SquaaresOfSortedArray([-4, -3, 0, 3, 10]));
 
+// =========================================================================
+
 
 
 //   Remove Duplicates from Sorted Array
 
-const RemoveDuplicate = (nums) => {
+const RemoveDuplicate = (num) => {
     let i = 1;
 
-    for(let j = 1; j<nums.length; j++){
-        if(nums[j] !== nums[i - 1]){
-            nums[i] = nums[j]
+    for(let j = 1; j<num.length; j++){
+        if(num[j] !== num[i - 1]){
+            num[i] = num[j]
             i++
         }        
     }
     return i
 }
 
-console.log(RemoveDuplicate([1, 1, 2, 2]));
+// console.log(RemoveDuplicate([1, 1, 2, 2]));
 
+// =========================================================================
+
+// 3 sum 
+
+const threeSum = (num) => {
+    for(let i = 0; i < num.length; i++){
+        for (let j = i +1; j < num.length; j++){
+            for(let k = j +1; k < num.length; k++){
+                if(num[i] + num[j] + num[k] === 0){
+                    return [num[i], num[j], num[k]]
+                }
+            }
+        }
+    }
+}
+
+// }
+// console.log(threeSum([-1, 0, 1, 2, -1, -4]));
+// 
+                    
+           
+// =========================================================================
+
+const ThreeSum = (nums) => {
+    const result = [];
+
+    const num  = nums.sort((a, b) => a - b)
+
+    for(let i = 0; i < num.length - 2; i++){
+        let left = i + 1;
+        let right = num.length - 1;
+
+
+        if(i > 0 && num[i] == num[i - 1]){
+            continue
+        }
+
+
+        while(left < right) {
+            let sum  = num[i] + num[left] + num[right]
+
+//             if (num.length == 3 && sum !== 0) {
+//                  result.push()
+//             }
+// 
+//             if(num[i] == 0 && num[left] == 0 && num[right] == 0) {
+//                 result.push([0, 0, 0])
+//             }
+
+            
+            if(sum === 0) {
+                result.push([num[i], num[left], num[right]])
+    
+
+        
+                while(left < right && num[left] == num[left + 1]){
+                    left++
+                }
+
+                while(right > left && num[right] == num[right - 1]){
+                    right--
+                }
+
+                left++
+                right--
+
+            } else if (sum < 0) {
+                left++
+            } else {
+                right--
+            }
+        }
+
+    }
+    return result;
+}
+
+console.log(ThreeSum([-1, 0, 1, 2, -1, -4]));
+console.log(ThreeSum([-1, 2, 2]));
+console.log(ThreeSum([0, 0, 0]));
