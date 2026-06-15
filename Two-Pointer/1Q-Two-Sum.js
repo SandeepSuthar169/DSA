@@ -133,15 +133,6 @@ const ThreeSum = (nums) => {
 
         while(left < right) {
             let sum  = num[i] + num[left] + num[right]
-
-//             if (num.length == 3 && sum !== 0) {
-//                  result.push()
-//             }
-// 
-//             if(num[i] == 0 && num[left] == 0 && num[right] == 0) {
-//                 result.push([0, 0, 0])
-//             }
-
             
             if(sum === 0) {
                 result.push([num[i], num[left], num[right]])
@@ -170,6 +161,73 @@ const ThreeSum = (nums) => {
     return result;
 }
 
-console.log(ThreeSum([-1, 0, 1, 2, -1, -4]));
-console.log(ThreeSum([-1, 2, 2]));
-console.log(ThreeSum([0, 0, 0]));
+// console.log(ThreeSum([-1, 0, 1, 2, -1, -4]));
+// console.log(ThreeSum([-1, 2, 2]));
+// console.log(ThreeSum([0, 0, 0]));
+
+
+
+// ====================================================
+
+const threeSumClosest = (nums, target) => {
+    nums.sort((a, b) => a - b)
+
+    let closestSum = nums[0] + nums[1] + nums[2]
+
+    for(let i = 0; i < nums.length - 2; i++){
+        let left = i + 1;
+        let right = nums.length - 1;
+
+        while(left < right) {
+            let sum = nums[i] + nums[left] + nums[right]
+
+            if(Math.abs(target - sum) < Math.abs(target - closestSum)){
+                closestSum = sum
+            }
+
+            if(sum < target) {
+                left++
+            } else if (sum > target){
+                right--
+            } else {
+                return sum 
+            }
+        }
+    }
+    return closestSum
+}
+
+// console.log(
+//     threeSumClosest([-1, 2, 1, -4], 1)
+// );
+
+
+
+// ==============================================================
+
+const TripletswithSmallerSum = (nums, target) => {
+    nums.sort((a, b) => a - b)
+
+    let count = 0;
+
+    for (let i = 0; i < nums.length - 2; i++){
+        let left = i + 1;
+        let right  = nums.length -1
+
+
+        while(left < right) {
+            const sum = nums[i] + nums[left] + nums[right]
+            
+            if(sum < target){
+                count+= right - left;
+                left++
+            } else {
+                right--
+            }
+        }
+    }
+    return count
+}
+
+console.log(TripletswithSmallerSum([-1, 0, 2, 3, 4], 3));
+
