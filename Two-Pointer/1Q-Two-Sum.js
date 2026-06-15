@@ -229,5 +229,70 @@ const TripletswithSmallerSum = (nums, target) => {
     return count
 }
 
-console.log(TripletswithSmallerSum([-1, 0, 2, 3, 4], 3));
+// console.log(TripletswithSmallerSum([-1, 0, 2, 3, 4], 3));
+
+// ===========================================================
+
+const SortColors = (nums) => {
+    let low = 0;
+    let mid = 0;
+    let high = nums.length - 1;
+
+    while (mid <= high) {
+        if(nums[mid] == 0){
+            [nums[low], nums[mid]] = [nums[mid], nums[low]];
+            low++;
+            mid++
+        } else if (nums[mid] == 1){
+            mid++;
+        } else {
+            [nums[mid], nums[high]] = [nums[high], nums[mid]];
+            high--;
+        }
+    }
+    return nums
+}
+
+
+// console.log(SortColors([0, 0, 2, 1, 1, 2]));
+// console.log(SortColors([0, 2, 1, 1, 0, 2]));
+
+
+// ===========================================================
+
+const RemoveElement = function(nums, val) {
+    let much = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== val) {
+            nums[much] = nums[i];
+            much++;
+        }
+    }
+
+    return much;
+};
+
+
+// console.log(RemoveElement([2, 1, 3, 0, 2, 1, 0], 2));
+// console.log(RemoveElement([3,2,2,3], 2));
+
+
+
+const MoveZeroes = (nums) => {
+    // let end = nums.length - 1;
+    let end = 0
+
+    for (let i = 0; i < nums.length ; i++){
+        if(nums[i] !== 0){
+            [nums[end], nums[i]] = [nums[i], nums[end]]
+            end++;
+        }
+    }
+    return nums
+}
+console.log(MoveZeroes([0, 1, 0, 3, 1, 2]));
+console.log(MoveZeroes([0, 1, 0, 3, 0, 2]));
+
+
 
