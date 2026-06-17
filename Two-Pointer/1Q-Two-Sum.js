@@ -277,6 +277,7 @@ const RemoveElement = function(nums, val) {
 // console.log(RemoveElement([2, 1, 3, 0, 2, 1, 0], 2));
 // console.log(RemoveElement([3,2,2,3], 2));
 
+// ===============================================================
 
 
 const MoveZeroes = (nums) => {
@@ -291,8 +292,137 @@ const MoveZeroes = (nums) => {
     }
     return nums
 }
-console.log(MoveZeroes([0, 1, 0, 3, 1, 2]));
-console.log(MoveZeroes([0, 1, 0, 3, 0, 2]));
+// console.log(MoveZeroes([0, 1, 0, 3, 1, 2]));
+// console.log(MoveZeroes([0, 1, 0, 3, 0, 2]));
+
+
+// =============================================================
+
+const ValidPalindrome = (s) => {
+    let chars = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    let left = 0
+    let right = chars.length - 1;
+
+    while(left < right) {
+        if(chars[left] !== chars[right]){
+            return false
+        }
+        left++
+        right-- 
+    }
+    return true
+
+
+}
+
+// console.log(ValidPalindrome("A man, a plan, a canal: Panama"));
+
+
+// ================================================================
+
+// Input: s = ["h","e","l","l","o"]
+// Output: ["o","l","l","e","h"]
+
+const ReverseString = (s) => {
+    let left = 0;
+    let right = s.length - 1
+
+    while (left < right) {
+        [s[left], s[right]] = [s[right], s[left]]
+        left++;
+        right--
+    }
+    return s
+}
+
+// console.log(ReverseString(["h","e","l","l","o"]));
+
+// ========================================================
+
+const ReverseVowelsofaString = (s) => {
+    let char = s.split("")
+    let left = 0;
+    let right = char.length -1;
+
+    const vowel = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+
+    while(left < right){
+
+        if (vowel.includes(char[left]) && vowel.includes(char[right])) {
+            [char[left], char[right]] = [char[right], char[left]];
+            left++;
+            right--;
+        } else {
+            if(!vowel.includes(char[left])){
+                left++
+            } 
+            if(!vowel.includes(char[right])){
+                right--
+            }
+        }
+        
+    }
+    return char.join("")
+
+}
+
+// console.log(ReverseVowelsofaString("IceCreAm"));
 
 
 
+// ========================================================
+
+const FourSum = (nums, target) => {
+    nums.sort((a, b) => a - b)
+
+    const result = []
+
+    for(let i = 0; i < nums.length - 1; i++){
+
+        if(i > 0 && nums[i] === nums[i - 1]) {
+            continue
+        }
+
+        for (let j = i + 1; j < nums.length - 2; j++){
+
+            if(j > i + 1 && nums[j] === nums[j - 1]){
+                continue
+            }
+
+
+            let left = j + 1;
+            let right = nums.length -1;
+
+            while (left < right){
+                const sum = nums[i] + nums[left] + nums[right] + nums[j]
+
+                if(sum === target) {
+                    result.push([nums[i], nums[left], nums[right], nums[j]])
+
+                    while(left < right && nums[left] == nums[left + 1]){
+                        left++
+                    }
+                    while(left < right && nums[right] == nums[right - 1]){
+                        right--
+                    }
+
+                    left++;
+                    right--
+
+
+                } else if (sum < target) {
+                    left++
+                } else {
+                    right--
+                }
+        
+            }
+        }
+    }
+
+    return result
+}
+
+console.log(FourSum([1,0,-1,0,-2,2], 0));
+console.log(FourSum([2,2,2,2,2], 8));
