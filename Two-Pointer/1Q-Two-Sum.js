@@ -424,5 +424,5 @@ const FourSum = (nums, target) => {
     return result
 }
 
-console.log(FourSum([1,0,-1,0,-2,2], 0));
-console.log(FourSum([2,2,2,2,2], 8));
+// console.log(FourSum([1,0,-1,0,-2,2], 0));
+// console.log(FourSum([2,2,2,2,2], 8));
