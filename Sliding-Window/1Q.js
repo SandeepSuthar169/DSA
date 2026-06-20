@@ -101,3 +101,28 @@ var backspaceCompare = function(s, t) {
 // console.log(backspaceCompare("a#c", "b"));
 
 
+// ===============================================
+
+const containsDuplicateII = (nums, k) => {
+    const map = new Map();
+
+    for (let i = 0; i < nums.length; i++) {
+        if (map.has(nums[i])) {
+            if (i - map.get(nums[i]) <= k) {
+                return true;
+            }
+        }
+
+        map.set(nums[i], i);
+    }
+
+    
+    return false;
+};
+
+console.log(containsDuplicateII([1, 2, 3, 1], 3)); // true
+console.log(containsDuplicateII([1, 0, 1, 1], 1)); // true
+
+console.log(containsDuplicateII([1, 2, 3, 1, 2, 3], 2)); // false
+// ============================================
+// if (nums[left] === nums[right] && Math.abs(left - right) <= k) {
